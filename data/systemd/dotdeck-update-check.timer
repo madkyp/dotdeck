@@ -1,0 +1,9 @@
+[Unit]
+Description=DotDeck: comprobación periódica de actualizaciones
+
+[Timer]
+OnStartupSec=3min
+OnUnitActiveSec=6h
+
+[Install]
+WantedBy=timers.target

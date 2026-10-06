@@ -1,0 +1,7 @@
+[Unit]
+Description=DotDeck: buscar actualizaciones de dots
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/dotdeck --check-updates --notify

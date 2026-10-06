@@ -1,0 +1,43 @@
+# Verificado 2026-10-06: repo ARCHIVADO ("Not maintained anymore as I moved to niri"),
+# sin licencia, releases v2.x (última v2.2.0). setup.sh clona Maciejonos/dotfiles (nombre
+# anterior del mismo repo) en ~/.local/share/dotfiles y lanza install/install.
+id = "mkbula-dotfiles"
+name = "mkbula dotfiles"
+author = "mkbula"
+repo = "https://github.com/mkbula/dotfiles"
+description = "Hyprland con waybar (3 estilos), walker, temas dinámicos con matugen y LazyVim."
+license = ""
+hypr_format = "conf"
+warnings = [
+  "Repositorio archivado: el autor ya no lo mantiene (se pasó a niri). No recibirá actualizaciones.",
+  "Usa hyprland.conf (formato clásico) y tu Hyprland usa hyprland.lua: probablemente haya que adaptarlo.",
+  "El instalador modifica /etc/pacman.conf y la configuración de Ly (sudo): fuera del backup de DotDeck (el autor hace su propio backup con script de rollback).",
+]
+
+[track]
+mode = "release"
+
+[install]
+method = "script"
+command = "bash setup.sh"
+terminal = true
+touches = [
+  "~/.config/btop", "~/.config/elephant", "~/.config/fastfetch", "~/.config/ghostty",
+  "~/.config/gtk-3.0", "~/.config/gtk-4.0", "~/.config/hypr", "~/.config/mako", "~/.config/matugen",
+  "~/.config/starship", "~/.config/swayosd", "~/.config/uwsm", "~/.config/walker", "~/.config/waybar",
+  "~/.config/nvim", "~/.local/share/dotfiles", "~/.local/bin",
+]
+
+[deps]
+pacman = ["git"]
+aur = []
+note = "El instalador instala los paquetes de install/pkgs.txt (repos + AUR)."
+
+[preview]
+readme = "readme.md"
+images = ["demo/waybar-omarchy.png", "demo/waybar-eli.png", "demo/waybar-modern.png", "demo/walker.png", "demo/lazyvim.png"]
+cover = "covers/mkbula-dotfiles.jpg"
+
+[reload]
+commands = []
+note = "Reinicia la sesión al terminar."

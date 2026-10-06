@@ -1,0 +1,38 @@
+# Verificado 2026-10-06: repo oficial, GPL-3.0, releases semánticas (v2.5.0).
+# Instalación oficial en Arch = paquete AUR (no edita archivos sueltos).
+id = "caelestia-shell"
+name = "Caelestia Shell"
+author = "caelestia-dots"
+repo = "https://github.com/caelestia-dots/shell"
+description = "Shell de escritorio en Quickshell (barra, launcher, dashboard) del proyecto Caelestia."
+license = "GPL-3.0"
+hypr_format = ""
+warnings = [
+  "Es solo la shell; los dotfiles completos de Caelestia están en caelestia-dots/caelestia.",
+  "El paquete AUR depende de quickshell-git, que sustituye a tu paquete quickshell (lo usa skwd-wall).",
+  "Para que arranque solo, añade a hyprland.lua: hl.on(\"hyprland.start\", function() hl.exec_cmd(\"caelestia shell -d\") end)",
+]
+
+[track]
+mode = "release"
+
+[install]
+method = "script"
+command = "yay -S --needed caelestia-shell caelestia-cli"
+uninstall_command = "sudo pacman -Rns caelestia-shell caelestia-cli"
+terminal = true
+touches = ["~/.config/caelestia", "~/.config/quickshell/caelestia", "~/.local/state/caelestia"]
+
+[deps]
+pacman = []
+aur = []
+note = "El comando de instalación instala desde AUR caelestia-shell y caelestia-cli con sus dependencias (quickshell-git, libcava, ddcutil, fuentes Material Symbols/Rubik/Cascadia…)."
+
+[preview]
+readme = "README.md"
+images = []
+cover = "covers/caelestia-shell.png"   # imagen elegida por el usuario (relativa a este archivo)
+
+[reload]
+commands = []
+note = "Lanza la shell con: caelestia shell -d"

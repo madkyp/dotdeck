@@ -1,0 +1,53 @@
+# EJEMPLO TEMPORAL de validación técnica del motor (Fase 0), pendiente de sustituir por la
+# lista real. Verificado: GPL-3.0, releases (tags v2.3.x). Usa hyprland.conf (clásico).
+id = "jakoolit-hyprland-dots"
+name = "JaKooLit Hyprland-Dots"
+author = "JaKooLit"
+repo = "https://github.com/JaKooLit/Hyprland-Dots"
+description = "EJEMPLO TEMPORAL — dots populares de Hyprland usados para probar backup/instalación/actualización/reversión."
+license = "GPL-3.0"
+example = true
+hypr_format = "conf"
+warnings = ["Usa hyprland.conf (formato clásico) y tu Hyprland usa hyprland.lua: probablemente haya que adaptarlo."]
+
+[track]
+mode = "release"
+
+[install]
+method = "files"
+touches = []
+
+[[install.links]]
+src = "config/hypr"
+dest = "~/.config/hypr"
+
+[[install.links]]
+src = "config/waybar"
+dest = "~/.config/waybar"
+
+[[install.links]]
+src = "config/rofi"
+dest = "~/.config/rofi"
+
+[[install.links]]
+src = "config/kitty"
+dest = "~/.config/kitty"
+
+[[install.links]]
+src = "config/swaync"
+dest = "~/.config/swaync"
+
+[[install.links]]
+src = "config/wlogout"
+dest = "~/.config/wlogout"
+
+[deps]
+pacman = ["waybar", "rofi", "kitty", "swaync", "wlogout"]
+aur = []
+
+[preview]
+readme = "README.md"
+images = []
+
+[reload]
+commands = []

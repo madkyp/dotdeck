@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=DotDeck
+GenericName=Gestor de dots de Hyprland
+Comment=Instala, actualiza, revierte y limpia dots de Hyprland con backups verificados
+Exec=dotdeck
+Icon=io.github.madkyp.DotDeck
+Terminal=false
+Categories=Settings;DesktopSettings;GTK;
+Keywords=hyprland;dotfiles;rice;theme;backup;
+StartupNotify=true
+StartupWMClass=io.github.madkyp.DotDeck

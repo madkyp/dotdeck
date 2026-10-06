@@ -1,0 +1,102 @@
+# Verificado 2026-10-06: sin licencia declarada, sin tags (commits de main). Repo de ~900 MB
+# (DotDeck solo descarga las carpetas enlazadas). El instalador oficial es un binario
+# precompilado que pide sudo vía polkit y NO instala dependencias: aquí se aplica copiando
+# .config/* como indica el README ("clone the repo and copy the files around manually").
+id = "surface-dots"
+name = "Surface Dots"
+author = "snes19xx"
+repo = "https://github.com/snes19xx/surface-dots"
+description = "Rice de Hyprland + Quickshell con temas Everforest, pensado para pantallas 3:2 (Surface)."
+license = ""
+hypr_format = "lua"
+warnings = [
+  "Geometría pensada para pantallas 3:2 de alta resolución; en otras puede verse desalineado (ver FAQ del README).",
+  "Sin licencia declarada en el repositorio.",
+  "Se omiten firefox, .vscode, khal, vdirsyncer, spicetify y gtk-theme (personales o requieren pasos aparte).",
+]
+
+[track]
+mode = "commit"
+
+[install]
+method = "files"
+touches = []
+
+[[install.links]]
+src = ".config/hypr"
+dest = "~/.config/hypr"
+
+[[install.links]]
+src = ".config/quickshell"
+dest = "~/.config/quickshell"
+
+[[install.links]]
+src = ".config/waybar"
+dest = "~/.config/waybar"
+
+[[install.links]]
+src = ".config/rofi"
+dest = "~/.config/rofi"
+
+[[install.links]]
+src = ".config/kitty"
+dest = "~/.config/kitty"
+
+[[install.links]]
+src = ".config/dunst"
+dest = "~/.config/dunst"
+
+[[install.links]]
+src = ".config/mako"
+dest = "~/.config/mako"
+
+[[install.links]]
+src = ".config/fastfetch"
+dest = "~/.config/fastfetch"
+
+[[install.links]]
+src = ".config/starship.toml"
+dest = "~/.config/starship.toml"
+
+[[install.links]]
+src = ".config/qt6ct"
+dest = "~/.config/qt6ct"
+
+[[install.links]]
+src = ".config/kvantum"
+dest = "~/.config/kvantum"
+
+[[install.links]]
+src = ".config/ags"
+dest = "~/.config/ags"
+
+[[install.links]]
+src = ".config/zathura"
+dest = "~/.config/zathura"
+
+[[install.links]]
+src = ".config/color-schemes"
+dest = "~/.config/color-schemes"
+optional = true
+
+[deps]
+pacman = [
+  "hyprland", "hypridle", "hyprlock", "hyprpicker", "quickshell", "awww", "xdg-utils",
+  "xdg-desktop-portal-hyprland", "xdg-desktop-portal-gtk", "polkit-gnome", "networkmanager",
+  "nm-connection-editor", "bluez", "bluez-utils", "blueman", "upower", "webkit2gtk-4.1", "dunst",
+  "rofi", "kitty", "thunar", "mpv", "zathura", "fastfetch", "starship", "qt6ct", "kvantum",
+  "papirus-icon-theme", "qt6-5compat", "qt6-svg", "qqc2-desktop-style", "pipewire-pulse", "libpulse",
+  "pamixer", "pavucontrol", "playerctl", "brightnessctl", "libnotify", "wl-clipboard", "grim", "slurp",
+  "swappy", "curl", "jq", "pacman-contrib", "ttf-nerd-fonts-symbols", "ttf-jetbrains-mono-nerd",
+]
+aur = ["grimblast-git", "ttf-cm-unicode"]
+note = "El README pide también ttf-google-fonts-git (varios GB) o, en su lugar, las familias Manrope, EB Garamond, Space Mono, Cinzel, Newsreader, Lora, Cormorant Garamond, Fraunces, Inter y Plus Jakarta Sans. Opcionales: auto-cpufreq, howdy-git, spicetify-cli, evercal (AUR)."
+
+[preview]
+readme = "README.md"
+images = []
+cover = "covers/surface-dots.jpg"
+
+[reload]
+commands = []
+note = "Cierra sesión y vuelve a entrar para que arranquen quickshell y los servicios del rice."

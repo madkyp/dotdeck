@@ -1,0 +1,14 @@
+[project]
+name = "dotdeck"
+version = "0.1.0"
+description = "Hyprland dots manager: preview, install with verified backups, update, revert and clean up"
+requires-python = ">=3.11"
+license = "MIT"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B"]
+# E741 (l/O como nombres) y E702/E731 (estilo compacto en la CLI y tests) se aceptan.
+ignore = ["E501", "E741", "E702", "E731"]

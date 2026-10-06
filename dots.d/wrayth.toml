@@ -1,0 +1,40 @@
+# Verificado 2026-10-06: GPL-3.0, releases (v1.4.0, fichero VERSION). Exige Hyprland 0.56+
+# con hyprland.lua (coincide con tu sistema). El instalador hace backup de hyprland.lua y .bashrc.
+id = "wrayth"
+name = "Wrayth"
+author = "bowenbride"
+repo = "https://github.com/bowenbride/wrayth"
+description = "Shell en Quickshell con «deck» a pantalla completa: terminal, diagnóstico, planificador y vigilancia de vulnerabilidades."
+license = "GPL-3.0"
+hypr_format = "lua"
+warnings = [
+  "Sustituye tu hyprland.lua por su configuración completa (escala 1 en todos los monitores).",
+  "Diseñado para al menos 1920×1080 lógicos.",
+]
+
+[track]
+mode = "release"
+
+[install]
+method = "script"
+command = "bash install.sh"
+terminal = true
+touches = [
+  "~/.config/hypr", "~/.config/quickshell/wrayth", "~/.config/wrayth", "~/.local/state/wrayth",
+  "~/.cache/wrayth", "~/.local/share/fonts/chakra-petch", "~/.local/share/fonts/material-symbols-sharp",
+  "~/Pictures/wallpapers/wrayth", "~/.local/bin", "~/.bashrc",
+]
+
+[deps]
+pacman = ["quickshell", "grim", "wl-clipboard", "polkit", "xdg-desktop-portal-hyprland", "xdg-desktop-portal-gtk", "arch-audit", "pacman-contrib"]
+aur = []
+note = "El instalador muestra un único «sudo pacman -S --needed …» con lo que falte."
+
+[preview]
+readme = "README.md"
+images = []
+cover = "covers/wrayth.jpg"
+
+[reload]
+commands = []
+note = "Cierra sesión y vuelve a entrar."

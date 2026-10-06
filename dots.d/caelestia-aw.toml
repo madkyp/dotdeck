@@ -1,0 +1,37 @@
+# Verificado 2026-10-06: sin licencia declarada, sin tags (commits de main). Parche sobre
+# Caelestia: patch.sh compila forks en /tmp e instala con "sudo cmake --install" y
+# "sudo cp" sobre los archivos del paquete del sistema.
+id = "caelestia-aw"
+name = "Caelestia AW (fondos animados)"
+author = "AdiAmbassador"
+repo = "https://github.com/AdiAmbassador/caelestia-aw"
+description = "Parche de Caelestia que añade fondos de pantalla animados (vídeo) y decodificación por hardware."
+license = ""
+hypr_format = "lua"
+warnings = [
+  "Requiere Caelestia instalado antes (dot caelestia-shell o «caelestia install»).",
+  "Modifica archivos del sistema con sudo (shell y CLI de Caelestia en /usr): eso NO lo cubre el backup de DotDeck. Para deshacerlo: su uninstall.sh o «yay -S caelestia-cli caelestia-shell --overwrite '*'».",
+]
+
+[track]
+mode = "commit"
+
+[install]
+method = "script"
+command = "bash patch.sh"
+uninstall_command = "bash uninstall.sh"
+terminal = true
+touches = ["~/.config/caelestia", "~/Pictures/Wallpapers/Animated"]
+
+[deps]
+pacman = ["qt6-multimedia", "ffmpeg", "python-pillow"]
+aur = ["caelestia-shell", "caelestia-cli"]
+
+[preview]
+readme = "README.md"
+images = []
+cover = "covers/caelestia-aw.jpg"
+
+[reload]
+commands = []
+note = "patch.sh reinicia Caelestia automáticamente."

@@ -1,0 +1,85 @@
+# ════════════════════════════════════════════════════════════════════════════
+#  Formato de definición de un dot para DotDeck  (un archivo .toml por dot)
+#
+#  Dónde van:
+#    · Lista inicial (con la app):    /usr/lib/dotdeck/dots.d/*.toml  (repo: dots.d/)
+#    · Añadidos por ti:               ~/.config/dotdeck/dots.d/*.toml
+#  Un archivo tuyo con el mismo id que uno inicial lo sustituye.
+#  «+ Añadir dot» en la app genera exactamente este formato (y rellena [detected]).
+#  Tras editar a mano, pulsa ⟳ en la app o ejecuta `dotdeck list` para validarlo.
+# ════════════════════════════════════════════════════════════════════════════
+
+id = "mi-dot"                     # OBLIGATORIO. minúsculas, números . _ -  (único)
+name = "Mi Dot"                   # nombre visible
+author = "alguien"
+repo = "https://github.com/alguien/mi-dot"   # OBLIGATORIO. https://, git@, file:// o ruta
+description = "Una línea que lo describa."
+license = "MIT"
+branch = ""                       # vacío = rama principal del repo
+example = false                   # true = «ejemplo temporal» (solo para pruebas)
+hypr_format = "lua"               # "lua" | "conf" | "" → avisa si no coincide con tu Hyprland
+warnings = ["Avisos que se muestran en el detalle antes de instalar."]
+
+[track]
+# Cómo se detectan actualizaciones:
+#   "release" → última release de GitHub (si no hay, último tag)
+#   "tag"     → tag de git con número de versión más alto
+#   "commit"  → último commit de la rama
+mode = "release"
+
+[install]
+# "files"  → DotDeck enlaza (symlink) carpetas/archivos de un checkout del repo a tu $HOME.
+#            Es lo más limpio: se sabe exactamente qué pertenece al dot y tus cambios
+#            manuales se detectan (y se intentan conservar) al actualizar.
+# "script" → ejecuta el instalador del autor en una terminal visible (sudo te pide la
+#            contraseña ahí). DotDeck respalda antes `touches` + tus ~/.bashrc/.zshrc/…,
+#            hace una instantánea antes/después y registra lo que el script creó.
+method = "files"
+
+# Solo para method = "script":
+command = "bash install.sh"       # se ejecuta dentro del checkout del repo
+update_command = ""               # vacío = se vuelve a ejecutar `command`
+uninstall_command = ""            # desinstalador del autor (opcional; se ofrece al desinstalar)
+terminal = true
+# Rutas que el instalador modifica: SE RESPALDAN ANTES y se restauran al desinstalar/revertir.
+# Obligatorio en modo script. Nunca $HOME ni ~/.config enteros: subcarpetas concretas.
+touches = ["~/.config/quickshell", "~/.config/hypr"]
+
+# Solo para method = "files": una entrada por ruta.
+[[install.links]]
+src = ".config/waybar"            # ruta dentro del repo
+dest = "~/.config/waybar"         # destino (siempre dentro de $HOME)
+
+[[install.links]]
+src = ".zshrc"
+dest = "~/.zshrc"
+optional = true                   # no se instala salvo que lo marques al instalar
+note = "sustituye tu ~/.zshrc"
+
+[deps]
+# Se comprueban con `pacman -T`. Antes de instalar nada se te enseña la lista y el comando.
+pacman = ["waybar", "rofi"]       # repos oficiales (si alguno es del AUR se detecta solo)
+aur = ["algun-paquete-git"]       # se instala con paru/yay
+note = "Texto libre sobre dependencias."
+
+[preview]
+readme = "README.md"              # ruta del README en el repo (también .github/README.md)
+images = ["assets/shot1.png", "https://ejemplo.com/captura.png"]  # se suman a las del README
+# Vídeos: .mp4/.webm del repo o URLs, y los vídeos que el README incrusta (enlaces de
+# github.com/user-attachments) se muestran en la galería en bucle y sin sonido.
+# Portada: miniatura en la Biblioteca y primera imagen de la galería. Ruta del repo, URL o
+# archivo relativo a esta definición (desde la app: Editar → Portada → elegir archivo).
+cover = "covers/mi-dot.png"
+# Presentación propia para «Acerca de» (si no, se extrae del README). Párrafos separados por línea en blanco.
+about = """Texto de presentación del dot."""
+
+[reload]
+commands = ["pkill waybar; waybar"]   # se ejecutan tras instalar (solo en tu sesión real)
+note = "Texto que se muestra al terminar (p.ej. «cierra sesión»)."
+# Si el dot toca ~/.config/hypr, DotDeck ejecuta `hyprctl reload` y comprueba
+# `hyprctl configerrors` (desactivable en Ajustes).
+
+[detected]
+# Lo rellena «+ Añadir dot»: qué campos detectó solo y cuáles revisaste/rellenaste tú.
+auto = ["readme", "track"]
+manual = ["touches"]

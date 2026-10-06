@@ -1,0 +1,65 @@
+# Verificado 2026-10-06: GPL-3.0. Publica en master cada dos semanas (rc → master, ver
+# RELEASE_POLICY.md); las releases/tags son esporádicas, así que se siguen los commits de master,
+# que es lo que hace su guía oficial de actualización:
+#   cd ~/HyDE/Scripts && git fetch --update-shallow --depth 1 origin master
+#   git reset --hard origin/master && ./install.sh -r
+# El usuario ya lo tiene instalado en ~/HyDE → DotDeck lo adopta (install.existing).
+# touches = destinos de Scripts/restore_cfg.psv (lo que ./install.sh -r puede sobrescribir).
+id = "hyde"
+name = "HyDE"
+author = "HyDE-Project"
+repo = "https://github.com/HyDE-Project/HyDE"
+description = "Hyprland Desktop Environment: rice completo con temas intercambiables, wallbash, waybar, rofi y kitty."
+license = "GPL-3.0"
+hypr_format = "lua"
+warnings = [
+  "Actualizar sigue la guía oficial: «git reset --hard» en ~/HyDE y «./install.sh -r», que sobrescribe la configuración listada en Scripts/restore_cfg.psv. DotDeck la respalda entera antes (≈500 MB) y HyDE guarda además sus copias en ~/.config/cfg_backups.",
+  "Tu hyprland.lua (tus ajustes) no se sobrescribe; los ajustes de HyDE viven en ~/.local/share/hypr.",
+]
+
+[track]
+mode = "commit"
+
+[install]
+method = "script"
+command = "cd Scripts && ./install.sh"
+update_command = "cd Scripts && ./install.sh -r"
+uninstall_command = "cd Scripts && ./uninstall.sh"
+terminal = true
+existing = "~/HyDE"
+touches = [
+  "~/.config/dunst", "~/.config/fastfetch", "~/.config/fish", "~/.config/gtk-3.0", "~/.config/hyde",
+  "~/.config/hypr", "~/.config/kitty", "~/.config/Kvantum", "~/.config/lsd", "~/.config/MangoHud",
+  "~/.config/menus", "~/.config/nwg-look", "~/.config/pypr", "~/.config/qt5ct", "~/.config/qt6ct",
+  "~/.config/rofi", "~/.config/starship", "~/.config/swaylock", "~/.config/systemd/user",
+  "~/.config/uwsm", "~/.config/vim", "~/.config/waybar", "~/.config/wlogout", "~/.config/xsettingsd",
+  "~/.config/zsh", "~/.config/Code/User/settings.json", "~/.config/VSCodium/User/settings.json",
+  "~/.config/baloofilerc", "~/.config/code-flags.conf", "~/.config/codium-flags.conf",
+  "~/.config/dolphinrc", "~/.config/electron-flags.conf", "~/.config/kdeglobals",
+  "~/.config/libinput-gestures.conf", "~/.config/spotify-flags.conf", "~/.config/xdg-terminals.list",
+  "~/.gtkrc-2.0", "~/.zshenv", "~/.local/bin/hydectl", "~/.local/bin/hyde-shell", "~/.local/lib/hyde",
+  "~/.local/share/dolphin", "~/.local/share/fastfetch/presets/hyde", "~/.local/share/hyde",
+  "~/.local/share/hypr", "~/.local/share/kio/servicemenus/hydewallpaper.desktop",
+  "~/.local/share/kxmlgui5/dolphin", "~/.local/share/wallbash", "~/.local/share/waybar",
+  "~/.local/state/dolphinstaterc",
+]
+
+[deps]
+pacman = ["git"]
+aur = []
+note = "./install.sh instala y comprueba sus paquetes (Scripts/pkg_core.lst) y te pide sudo en la terminal."
+
+[preview]
+readme = "README.md"
+images = [
+  "Source/assets/showcase_1.png", "Source/assets/showcase_2.png", "Source/assets/showcase_3.png",
+  "Source/assets/showcase_4.png", "Source/assets/theme_mocha_2.png", "Source/assets/theme_tokyo_1.png",
+]
+about = """HyDE (Hyprland Desktop Environment) es un escritorio completo sobre Hyprland, heredero de Hyprdots: barra waybar, menús rofi, notificaciones, bloqueo de pantalla y un sistema de temas que cambia todo el aspecto de golpe.
+
+Su sello es wallbash: genera los colores de waybar, rofi, kitty y GTK a partir del fondo de pantalla. Incluye una colección de temas (Catppuccin Mocha, Tokyo Night, Rosé Pine, Gruvbox…) que se cambian con un atajo."""
+cover = "covers/hyde.jpg"   # tema Catppuccin Mocha (el que usa el usuario)
+
+[reload]
+commands = []
+note = "HyDE recarga Hyprland y la waybar al terminar ./install.sh -r; si algo no se ve bien, cierra sesión y vuelve a entrar."

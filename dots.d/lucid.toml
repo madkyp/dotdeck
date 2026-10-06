@@ -1,0 +1,42 @@
+# Verificado 2026-10-06: MIT, releases (v1.10.5, fichero VERSION). Instala en ~/.config/quickshell
+# y genera hyprland.lua + módulos. Re-ejecutar el instalador es la forma oficial de actualizar.
+id = "lucid"
+name = "Lucid"
+author = "Sn3akyy1"
+repo = "https://github.com/Sn3akyy1/lucid"
+description = "Shell en Quickshell con efecto cristal: barra, docks, widgets, lockscreen, OSD y preferencias."
+license = "MIT"
+hypr_format = "lua"
+warnings = [
+  "Se usa --no-apps para no instalar las apps del dock (varios GB: Zen, VSCodium, Spotify, Steam…). Quítalo al editar el dot si las quieres.",
+  "Cambia el tema GTK (adw-gtk3-dark) y los iconos vía gsettings: eso no lo revierte el backup (gsettings).",
+]
+
+[track]
+mode = "release"
+
+[install]
+method = "script"
+command = "bash install.sh --no-apps"
+uninstall_command = "bash uninstall.sh"
+terminal = true
+touches = [
+  "~/.config/quickshell", "~/.config/lucid", "~/.config/matugen", "~/.config/hypr", "~/.config/kitty",
+  "~/.config/starship.toml", "~/.config/gtk-3.0", "~/.config/gtk-4.0", "~/.config/cava",
+  "~/.config/fish/config.fish", "~/.config/Code/User", "~/.config/VSCodium/User",
+  "~/.local/share/icons", "~/Pictures/wallpapers", "~/.bashrc", "~/.zshrc",
+]
+
+[deps]
+pacman = ["git"]
+aur = []
+note = "El instalador busca paru/yay, lista las dependencias y pregunta antes de instalar."
+
+[preview]
+readme = "README.md"
+images = ["assets/prev1.webp"]
+cover = "covers/lucid.jpg"
+
+[reload]
+commands = ["hyprctl reload"]
+note = "Cierra sesión y vuelve a entrar para el autostart de la shell."

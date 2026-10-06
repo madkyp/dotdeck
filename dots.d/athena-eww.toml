@@ -1,0 +1,68 @@
+# Verificado 2026-10-06: MIT, sin tags (commits de main). Instalación oficial manual:
+# cp -r .config/* ~/.config/ && cp .zshrc ~/  → aquí como symlinks (reversibles).
+id = "athena-eww"
+name = "Athena EWW"
+author = "haikal-hakim"
+repo = "https://github.com/haikal-hakim/athena-eww"
+description = "Barra, dashboard y paneles en EWW con dunst, rofi y kitty a juego."
+license = "MIT"
+hypr_format = ""
+warnings = [
+  "El widget del tiempo necesita tu API key de OpenWeatherMap en ~/.config/eww/dashboard/scripts/weather.py.",
+  "El autostart de eww no se instala: añádelo a tu hyprland.lua (ver README, sección Autostart).",
+]
+
+[track]
+mode = "commit"
+
+[install]
+method = "files"
+touches = []
+
+[[install.links]]
+src = ".config/eww"
+dest = "~/.config/eww"
+
+[[install.links]]
+src = ".config/dunst"
+dest = "~/.config/dunst"
+
+[[install.links]]
+src = ".config/rofi"
+dest = "~/.config/rofi"
+
+[[install.links]]
+src = ".config/kitty"
+dest = "~/.config/kitty"
+
+[[install.links]]
+src = ".config/fastfetch"
+dest = "~/.config/fastfetch"
+
+[[install.links]]
+src = ".config/starship"
+dest = "~/.config/starship"
+
+[[install.links]]
+src = ".zshrc"
+dest = "~/.zshrc"
+optional = true
+note = "sustituye tu ~/.zshrc; desactivado por defecto"
+
+[deps]
+pacman = [
+  "eww", "gawk", "bluez-utils", "brightnessctl", "curl", "dbus", "dunst", "grep", "hyprshutdown",
+  "inotify-tools", "jq", "libnotify", "networkmanager", "power-profiles-daemon", "python", "socat",
+  "wireplumber", "ttf-jetbrains-mono-nerd", "inter-font",
+]
+aur = []
+note = "Opcional: iconos Tela circle dark."
+
+[preview]
+readme = "README.md"
+images = []
+cover = "covers/athena-eww.jpg"
+
+[reload]
+commands = []
+note = "Arranca los widgets: eww daemon && eww open window_bar"

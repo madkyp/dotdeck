@@ -1,0 +1,41 @@
+# Verificado 2026-10-06: GPL-3.0, releases frecuentes (v0.24). install.sh es muy amplio:
+# drivers de GPU, /etc/pacman.conf, mkinitcpio, sudoers.d, SDDM, flatpaks, wallpapers y rust-dock.
+id = "rhythm-hyprland"
+name = "Rhythm Hyprland"
+author = "rhythmcreative"
+repo = "https://github.com/rhythmcreative/hyprland"
+description = "Escritorio completo (Hyprland Lua + Quickshell + waybar + pywal) con instalador para Arch y NixOS."
+license = "GPL-3.0"
+hypr_format = "lua"
+warnings = [
+  "El instalador toca la configuración del SISTEMA (drivers GPU, /etc/pacman.conf, mkinitcpio, /etc/sudoers.d, SDDM): eso NO lo cubre el backup de DotDeck. Prueba antes con --dry-run.",
+  "No uses --replace-configs-all: sobrescribe sin backup del autor (el de DotDeck sí se hace).",
+]
+
+[track]
+mode = "release"
+
+[install]
+method = "script"
+command = "bash install.sh --no-reboot"
+terminal = true
+touches = [
+  "~/.config/hypr", "~/.config/waybar", "~/.config/kitty", "~/.config/rofi", "~/.config/mako",
+  "~/.config/quickshell", "~/.config/Kvantum", "~/.config/gtk-3.0", "~/.config/wal",
+  "~/.config/rust-dock", "~/.config/rhythm", "~/.config/systemd/user", "~/.local/bin",
+  "~/.local/share/applications", "~/.bashrc", "~/.zshrc",
+]
+
+[deps]
+pacman = ["git"]
+aur = []
+note = "El instalador instala sus paquetes (packages.txt, flatpaks.txt) y te pide sudo."
+
+[preview]
+readme = "README.md"
+images = ["assets/desktop.png", "assets/control_center_crop.png"]
+cover = "covers/rhythm-hyprland.jpg"
+
+[reload]
+commands = []
+note = "Reinicia la sesión al terminar."

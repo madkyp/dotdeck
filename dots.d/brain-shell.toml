@@ -1,0 +1,37 @@
+# Verificado 2026-10-06: MIT, releases (v0.1.1). install.sh clona el repo en
+# ~/.local/src/Brain_Shell, copia ~/.config entero a ~/.config.backup-<fecha>-Brain_Shell
+# y añade el autostart a la config de Hyprland.
+id = "brain-shell"
+name = "Brain Shell"
+author = "Brainitech"
+repo = "https://github.com/Brainitech/Brain_Shell"
+description = "Shell en Quickshell con colores Material You (matugen) para Hyprland 0.55+."
+license = "MIT"
+hypr_format = ""
+warnings = [
+  "Matugen es obligatorio.",
+  "Su instalador copia TODO tu ~/.config a ~/.config.backup-<fecha>-Brain_Shell (puede ocupar mucho).",
+]
+
+[track]
+mode = "release"
+
+[install]
+method = "script"
+command = "bash install.sh"
+terminal = true
+touches = ["~/.config/hypr", "~/.config/Brain_Shell", "~/.config/matugen", "~/.config/quickshell", "~/.local/src/Brain_Shell"]
+
+[deps]
+pacman = ["quickshell", "qt6ct", "matugen", "awww", "imagemagick", "wf-recorder", "cava", "slurp", "wtype", "cliphist", "brightnessctl", "playerctl", "wl-clipboard", "libnotify"]
+aur = []
+note = "El instalador del autor instala el resto de dependencias."
+
+[preview]
+readme = "README.md"
+images = []
+cover = "covers/brain-shell.jpg"
+
+[reload]
+commands = []
+note = "Reinicia Hyprland para que arranque Brain Shell."

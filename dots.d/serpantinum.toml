@@ -1,0 +1,40 @@
+# Verificado 2026-10-06: AGPL-3.0, sin releases/tags (version.txt 2.2.4 → se siguen commits de master).
+# install/install.sh usa el propio checkout si se ejecuta desde el repo; interfaz interactiva.
+id = "serpantinum"
+name = "Serpantinum"
+author = "ilyamiro"
+repo = "https://github.com/ilyamiro/serpantinum"
+description = "Shell completa en Quickshell (antes dotfiles) con instalador interactivo para Arch."
+license = "AGPL-3.0"
+hypr_format = "lua"
+warnings = [
+  "El instalador cambia el gestor de inicio a SDDM y escribe en /etc/sddm.conf.d y /usr/share/sddm (sudo): eso NO lo cubre el backup de DotDeck.",
+  "El instalador ofrece telemetría opcional; puedes desactivarla en su menú.",
+  "Desde la v2 la configuración de monitores, atajos y autostart de Hyprland es cosa tuya.",
+]
+
+[track]
+mode = "commit"
+
+[install]
+method = "script"
+command = "bash install/install.sh"
+terminal = true
+touches = [
+  "~/.config/serpantinum", "~/.config/quickshell", "~/.config/cava", "~/.config/fastfetch",
+  "~/.config/kitty", "~/.config/user-dirs.dirs", "~/.local/bin", "~/.local/state/serpantinum",
+]
+
+[deps]
+pacman = ["git"]
+aur = []
+note = "El instalador del autor detecta e instala sus dependencias (pacman/AUR) y te las muestra."
+
+[preview]
+readme = "README.md"
+images = ["docs/assets/banner.png", "docs/assets/previews/preview_1.png"]
+cover = "covers/serpantinum.jpg"
+
+[reload]
+commands = []
+note = "Arranca la shell con: serpantinumd start"
