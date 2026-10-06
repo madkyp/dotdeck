@@ -49,6 +49,9 @@ class EditorPage(Adw.NavigationPage):
         self.save_btn.connect("clicked", lambda *_: self.save())
         hb.pack_end(self.save_btn)
         tv.add_top_bar(hb)
+        # Explica por qué no se puede guardar (antes solo estaba en el tooltip del botón).
+        self.problems = Adw.Banner(revealed=False)
+        tv.add_top_bar(self.problems)
         self.page = Adw.PreferencesPage()
         tv.set_content(self.page)
         self.set_child(tv)
@@ -419,17 +422,32 @@ class EditorPage(Adw.NavigationPage):
             problems.append(str(e))
         except AttributeError:
             return False
-        script = self.c_method.get_selected() == 1
-        if script and self.status.get("touches", ("", ""))[0] == "review" and not self.review_touch.get_active():
-            problems.append("confirma que has revisado las rutas que toca el instalador")
         if not self.e_name.get_text().strip():
             problems.append("falta el nombre")
         self.save_btn.set_sensitive(not problems)
         self.save_btn.set_tooltip_text("; ".join(problems) if problems else "Guardar en ~/.config/dotdeck/dots.d")
+        msg = "Para poder guardar: " + "; ".join(problems) if problems else ""
+        self.problems.set_title(GLib.markup_escape_text(msg[:300]))
+        self.problems.set_revealed(bool(problems))
         return not problems
+
+    def _touches_pending(self) -> bool:
+        """Rutas deducidas por heurística que aún no ha confirmado el usuario."""
+        return (self.c_method.get_selected() == 1 and self.status.get("touches", ("", ""))[0] == "review"
+                and not self.review_touch.get_active())
 
     def save(self):
         if not self.validate():
+            return
+        if self._touches_pending():
+            def ok(yes):
+                if yes:
+                    self.review_touch.set_active(True)
+                    self.save()
+            alert(self.win, "Confirma las rutas que toca",
+                  "Antes de instalar, DotDeck respaldará solo estas rutas (y las podrá restaurar). Se dedujeron "
+                  "leyendo el repo: si falta alguna, cancela y añádela en «Rutas que toca el instalador».",
+                  list(self.touches) or ["(ninguna)"], ok="Confirmar y guardar", callback=ok)
             return
         d = self.collect()
         old = self.editing

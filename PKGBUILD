@@ -1,7 +1,7 @@
 # Maintainer: madkyp
 pkgname=dotdeck
 pkgver=0.1.0
-pkgrel=16
+pkgrel=17
 pkgdesc="Gestor de dots de Hyprland: previsualiza, instala con backup, actualiza, revierte y limpia huérfanos"
 arch=('any')
 url="https://github.com/madkyp/dotdeck"
